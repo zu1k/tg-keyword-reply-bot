@@ -1,9 +1,8 @@
 # telegram 关键词自动回复机器人 开源版本
-telegram 关键词回复机器人，群主助手
+这个是关键词回复机器人的开源版本代码，[Release](https://github.com/zu1k/tg-keyword-reply-bot/releases) 中发布的为后续闭源版本，功能更多。
 
-
-
-### 命令介绍
+## 开源版本介绍
+### 基本命令介绍
 - 添加关键词回复规则 `/add 关键词===回复内容` 或者 `/add 关键词1||关键词2===回复内容` 
 - 关键词可以使用正则表达式,例如`/add re:p([a-z]+)ch===测试正则`,就会匹配规则`p([a-z]+)ch`  
 - 删除关键词规则 `/del 关键词` 暂不支持一次性删除多个关键词
@@ -18,15 +17,51 @@ telegram 关键词回复机器人，群主助手
 - 注意: 这里的链接必须是公开群组的,否则无法发出来
 
 
-### 后续增加功能的使用说明见： 
-##### [使用说明](https://telegra.ph/%E8%BF%99%E4%B8%AA%E6%88%91%E7%9F%A5%E9%81%93%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E-07-07)
+## 闭源版本介绍
+机器人闭源版本不断更新，至今已增加更多功能，详细功能见 **[使用说明](https://telegra.ph/%E8%BF%99%E4%B8%AA%E6%88%91%E7%9F%A5%E9%81%93%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E-07-07)**
 
-
-## 使用最新版本可执行文件搭建
-旧版本代码开源，新版本代码不再开源，但是随时更新新版本的可执行文件      
-进入 [Release 页面](https://github.com/zu1k/tg-keyword-reply-bot/releases) 下载最新版本可执行文件到服务器，然后进行部署       
-- 系统推荐使用： Ubuntu 18.04
+### 使用闭源版本可执行文件搭建  
+进入 **[Release 页面](https://github.com/zu1k/tg-keyword-reply-bot/releases)** 下载最新版本可执行文件到服务器，然后进行部署       
+- 系统推荐使用： Ubuntu 18.04, glibc版本2.27
 - 初次使用 `./tg-keyword-reply tg-bot-token` , 会将token存到数据库中
 - 后面使用 `./tg-keyword-reply` , 无需输入token
 
-后续未开源版本增加了更多群管功能，目前在线机器人 t.me/keyword_reply_bot 和 t.me/keywordreplybot
+#### 机器人命令列表
+是推荐给用户显示的命令，私聊机器人爹设置
+`help - 查看帮助
+add - 添加规则
+del - 删除规则
+list - 列出规则
+admin - 呼叫管理员
+banme - 禁言小游戏
+getid - 查看用户的信息 可回复查看别人
+autoreply - 开关自动回复功能
+autodelete - 开关自动删除消息功能
+replyorder - 开关回复ban/kick命令功能
+banmegame - 开关禁言小游戏功能
+playorderban - 开关玩命令惩罚功能
+banqingzhen - 开关防清真功能
+calladmin - 开关呼叫管理员功能
+welcome - 开关加群欢迎功能
+goodbye - 开关离群送别功能
+deletejoinmessage - 开关删除加群消息功能
+servicelist - 查看机器人功能列表`
+
+## 目前在线机器人
+如果有同学自己搭建的，也可以私聊我添加进列表
+- [这个我知道](https://t.me/keyword_reply_bot)
+- [关键词机器人](https://t.me/keywordreplybot)、
+
+
+## 赞助
+指 [这个我知道](https://t.me/keyword_reply_bot) 的服务器费用赞助，目前机器运行在一台1核1G的低配服务器上，月费用5刀，希望有 **钞能力** 的同学赞助一下服务器费用。
+
+### 赞助方式
+- tg私聊我： [Cop](https://t.me/veezer) 进行赞助（无手续费)
+- 进入发卡平台购买虚拟卡片进行赞助： [发卡平台](https://www.kuaifaka.com/purchasing?link=peekfun) (平台收取一定手续费)
+
+### 目前赞助名单
+- [聪聪](https://t.me/congcong) 420元
+- [小明HR](https://t.me/xuezha) 36元
+- [阿雅](https://t.me/alin0524) 50元 
+
