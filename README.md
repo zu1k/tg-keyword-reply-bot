@@ -28,7 +28,9 @@
 
 #### 机器人命令列表
 是推荐给用户显示的命令，私聊机器人爹设置
-`help - 查看帮助
+
+```
+help - 查看帮助
 add - 添加规则
 del - 删除规则
 list - 列出规则
@@ -45,12 +47,13 @@ calladmin - 开关呼叫管理员功能
 welcome - 开关加群欢迎功能
 goodbye - 开关离群送别功能
 deletejoinmessage - 开关删除加群消息功能
-servicelist - 查看机器人功能列表`
+servicelist - 查看机器人功能列表
+```
 
 ## 目前在线机器人
 如果有同学自己搭建的，也可以私聊我添加进列表
 - [这个我知道](https://t.me/keyword_reply_bot)
-- [关键词机器人](https://t.me/keywordreplybot)、
+- [关键词机器人](https://t.me/keywordreplybot)
 
 
 ## 赞助
