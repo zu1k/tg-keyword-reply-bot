@@ -65,8 +65,9 @@ servicelist - 查看机器人功能列表
 
 ## 目前在线机器人
 如果有同学自己搭建的，也可以私聊我添加进列表
-- [这个我知道](https://t.me/keyword_reply_bot)
-- [关键词机器人](https://t.me/keywordreplybot)
+- [这个我知道](https://t.me/keyword_reply_bot)  我搭建
+- [关键词机器人](https://t.me/keywordreplybot)  我搭建
+- [群主秘书](https://t.me/WeedChina_bot)  [农夫 420](https://t.me/nongfu420)搭建
 
 
 ## 赞助
