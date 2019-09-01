@@ -27,8 +27,9 @@
 - 后面使用 `./tg-keyword-reply` , 无需输入token
 
 #### 服务器选择
-因为telegram bot api服务器在荷兰，所以搭建机器人推荐荷兰服务器，比较好的推荐vultr
-你可以选择使用我的aff链接注册vultr: https://www.vultr.com/?ref=7791688-4F
+因为telegram bot api服务器在荷兰，所以搭建机器人推荐荷兰服务器，比较好的推荐vultr      
+你可以选择使用我的aff链接注册vultr: https://www.vultr.com/?ref=7791688-4F      
+因为机器人使用golang编写，性能较高，无需购买高配服务器，选择vultr最低配1核1G足以
 
 #### 机器人命令列表
 是推荐给用户显示的命令，私聊机器人爹设置
