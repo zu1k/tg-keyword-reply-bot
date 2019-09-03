@@ -81,4 +81,4 @@ servicelist - 查看机器人功能列表
 - [聪聪](https://t.me/congcong) 420元
 - [小明HR](https://t.me/xuezha) 36元
 - [阿雅](https://t.me/alin0524) 50元 
-
+- [冠希 科技传媒](https://t.me/a12399999) 39元
