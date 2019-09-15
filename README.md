@@ -1,4 +1,6 @@
 # telegram 关键词自动回复机器人 开源版本
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot?ref=badge_shield)
+
 这个是关键词回复机器人的开源版本代码，[Release](https://github.com/zu1k/tg-keyword-reply-bot/releases) 中发布的为后续闭源版本，功能更多。
 
 ## 开源版本介绍
@@ -81,3 +83,7 @@ servicelist - 查看机器人功能列表
 - [小明HR](https://t.me/xuezha) 36元
 - [阿雅](https://t.me/alin0524) 50元 
 - [冠希 科技传媒](https://t.me/a12399999) 39元
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot?ref=badge_large)
