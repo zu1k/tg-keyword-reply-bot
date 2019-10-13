@@ -79,10 +79,11 @@ servicelist - 查看机器人功能列表
 - 进入发卡平台购买虚拟卡片进行赞助： [发卡平台](https://www.kuaifaka.com/purchasing?link=peekfun) (平台收取一定手续费)
 
 ### 目前赞助名单
-- [聪聪](https://t.me/congcong) 420元
+- [聪聪](https://t.me/congcong) 420元+860元
 - [小明HR](https://t.me/xuezha) 36元
 - [阿雅](https://t.me/alin0524) 50元 
 - [冠希 科技传媒](https://t.me/a12399999) 39元
+- [🆉🄴🄰🄻🅂🄾🄽](https://t.me/zealson) 50元
 
 
 ## License
