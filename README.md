@@ -75,7 +75,6 @@ servicelist - 查看机器人功能列表
 指 [这个我知道](https://t.me/keyword_reply_bot) 的服务器费用赞助，目前机器运行在一台1核2G的服务器上，月费用10刀，希望有 **钞能力** 的同学赞助一下服务器费用。
 
 ### 赞助方式
-- tg私聊我： [Cop](https://t.me/veezer) 进行赞助（无手续费)
 - 进入发卡平台购买虚拟卡片进行赞助： [发卡平台](https://www.kuaifaka.com/purchasing?link=peekfun) (平台收取一定手续费)
 
 ### 目前赞助名单
