@@ -85,6 +85,8 @@ servicelist - 查看机器人功能列表
 - [冠希 科技传媒](https://t.me/a12399999) 39元
 - [🆉🄴🄰🄻🅂🄾🄽](https://t.me/zealson) 50元
 
+## 博客
+- [博客说明](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot.html)
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot?ref=badge_large)
