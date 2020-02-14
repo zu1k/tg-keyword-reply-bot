@@ -67,7 +67,7 @@ servicelist - 查看机器人功能列表
 
 ## 目前在线机器人
 - [这个我知道](https://t.me/keyword_reply_bot)  拒绝广告群，珍惜服务器资源，不要滥用      
-- [关键词小助手](https://t.me/keyword_unlimited_bot)  博彩、数字货币、狗腿专用，无任何限制      
+- [关键词小助手](https://t.me/keyword_unlimited_bot)  博彩、数字货币、狗推专用，无任何限制      
 
 
 ## 赞助
