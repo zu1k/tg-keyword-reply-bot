@@ -82,6 +82,7 @@ servicelist - 查看机器人功能列表
 - [阿雅](https://t.me/alin0524) 50元 
 - [冠希 科技传媒](https://t.me/a12399999) 39元
 - [🆉🄴🄰🄻🅂🄾🄽](https://t.me/zealson) 50元
+- [古博VPS](https://t.me/guboorg) 200元
 
 ## 博客
 - [博客说明](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot.html)
