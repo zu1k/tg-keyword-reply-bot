@@ -1,7 +1,7 @@
 # telegram 关键词自动回复机器人 开源版本
 <p align="center">
     <a href="https://goreportcard.com/report/github.com/zu1k/tg-keyword-reply-bot">
-        <img src="https://goreportcard.com/badge/github.com/zu1k/tg-keyword-reply-bot?style=flat-square">
+        <img src="https://goreportcard.com/badge/github.com/zu1k/tg-keyword-reply-bot">
     </a>
     <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot?ref=badge_shield">
         <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot.svg?type=shield" alt="FOSSA Status">
@@ -71,6 +71,8 @@ servicelist - 查看机器人功能列表
 - 进入 [反馈群](https://t.me/keywordreplybotcallback) 反馈问题 （推荐，实时性强）
 - 在github本库Issue反馈 （不太建议）
 
+## 使用说明
+- [博客说明](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot.html)
 
 ## 目前在线机器人
 - [这个我知道](https://t.me/keyword_reply_bot)  拒绝广告群，珍惜服务器资源，不要滥用      
@@ -90,9 +92,6 @@ servicelist - 查看机器人功能列表
 - [冠希 科技传媒](https://t.me/a12399999) 39元
 - [🆉🄴🄰🄻🅂🄾🄽](https://t.me/zealson) 50元
 - [古博VPS](https://t.me/guboorg) 200元
-
-## 博客
-- [博客说明](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot.html)
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot?ref=badge_large)
