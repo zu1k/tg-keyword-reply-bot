@@ -1,19 +1,20 @@
 package main
 
 import (
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"strconv"
 	"time"
 	"unicode"
+
+	api "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 /**
  * 检查是否是群组的管理员
  */
-func checkAdmin(gid int64, user tgbotapi.User) bool {
-	admins, _ := bot.GetChatAdministrators(tgbotapi.ChatConfig{gid, ""})
+func checkAdmin(gid int64, user api.User) bool {
+	admins, _ := bot.GetChatAdministrators(api.ChatConfig{ChatID: gid, SuperGroupUsername: ""})
 	uid := user.ID
-	if uid == 731400898 { //我自己的特权
+	if superUserId > 0 && uid == superUserId {
 		return true
 	}
 	for _, user := range admins {
@@ -37,9 +38,9 @@ func checkInGroup(id int64) bool {
 	return false
 }
 
-func chengfa(gid int64, user tgbotapi.User) {
-	botme, _ := bot.GetChatMember(tgbotapi.ChatConfigWithUser{gid, "", 838289550})
-	msg := tgbotapi.NewMessage(gid, "")
+func chengfa(gid int64, user api.User) {
+	botme, _ := bot.GetChatMember(api.ChatConfigWithUser{ChatID: gid, UserID: bot.Self.ID})
+	msg := api.NewMessage(gid, "")
 	if botme.CanRestrictMembers {
 		banMember(gid, user.ID, 60)
 		msg.Text = "[" + user.String() + "](tg://user?id=" + strconv.Itoa(user.ID) + ")乱玩管理员命令,禁言一分钟"
@@ -58,9 +59,9 @@ func banMember(gid int64, uid int, sec int64) {
 	if sec <= 0 {
 		sec = 9999999999999
 	}
-	chatuserconfig := tgbotapi.ChatMemberConfig{ChatID: gid, UserID: uid}
+	chatuserconfig := api.ChatMemberConfig{ChatID: gid, UserID: uid}
 	b := false
-	restricconfig := tgbotapi.RestrictChatMemberConfig{
+	restricconfig := api.RestrictChatMemberConfig{
 		ChatMemberConfig:      chatuserconfig,
 		UntilDate:             time.Now().Unix() + sec,
 		CanSendMessages:       &b,
@@ -71,9 +72,9 @@ func banMember(gid int64, uid int, sec int64) {
 }
 
 func unbanMember(gid int64, uid int) {
-	chatuserconfig := tgbotapi.ChatMemberConfig{ChatID: gid, UserID: uid}
+	chatuserconfig := api.ChatMemberConfig{ChatID: gid, UserID: uid}
 	b := true
-	restricconfig := tgbotapi.RestrictChatMemberConfig{
+	restricconfig := api.RestrictChatMemberConfig{
 		ChatMemberConfig:      chatuserconfig,
 		UntilDate:             9999999999999,
 		CanSendMessages:       &b,
@@ -87,19 +88,19 @@ func unbanMember(gid int64, uid int) {
  * 踢出群员
  */
 func kickMember(gid int64, uid int) {
-	cmconf := tgbotapi.ChatMemberConfig{ChatID: gid, UserID: uid}
-	_, _ = bot.KickChatMember(tgbotapi.KickChatMemberConfig{cmconf, 99999999999})
+	cmconf := api.ChatMemberConfig{ChatID: gid, UserID: uid}
+	_, _ = bot.KickChatMember(api.KickChatMemberConfig{ChatMemberConfig: cmconf, UntilDate: 99999999999})
 }
 
 func unkickMember(gid int64, uid int) {
-	_, _ = bot.UnbanChatMember(tgbotapi.ChatMemberConfig{ChatID: gid, UserID: uid})
+	_, _ = bot.UnbanChatMember(api.ChatMemberConfig{ChatID: gid, UserID: uid})
 }
 
 /**
  * 返回群组的所有管理员, 用来进行一次性@
  */
 func getAdmins(gid int64) string {
-	admins, _ := bot.GetChatAdministrators(tgbotapi.ChatConfig{gid, ""})
+	admins, _ := bot.GetChatAdministrators(api.ChatConfig{ChatID: gid})
 	list := ""
 	for _, admin := range admins {
 		user := admin.User
@@ -115,8 +116,7 @@ func getAdmins(gid int64) string {
  * 检查文字中是否包含阿拉伯文
  */
 func checkQingzhen(text string) bool {
-	bs := []rune(text)
-	for _, c := range bs {
+	for _, c := range text {
 		if unicode.Is(unicode.Scripts["Arabic"], c) {
 			return true
 		}

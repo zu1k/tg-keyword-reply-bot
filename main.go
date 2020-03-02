@@ -1,34 +1,34 @@
 package main
 
 import (
-	"github.com/go-telegram-bot-api/telegram-bot-api"
-	"github.com/robfig/cron"
+	"flag"
+	"fmt"
 	"log"
 	"math/rand"
-	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	api "github.com/go-telegram-bot-api/telegram-bot-api"
+	"github.com/robfig/cron"
 )
 
-var bot *tgbotapi.BotAPI
+var bot *api.BotAPI
 var gcron *cron.Cron
 
 func main() {
-	dbopen()
-	args := os.Args //获取用户输入的所有参数
-	if args != nil && len(args) == 2 {
-		dbinit(args[1])
-	}
-	loadinfo()
+	botToken := flag.String("t", "", "your bot Token")
+	flag.IntVar(&superUserId, "s", 0, "super manager Id")
+	flag.Parse()
+	token := dbInit(*botToken)
 	gcron = cron.New()
 	gcron.Start()
 	//开始工作
-	start()
+	start(token)
 }
 
-func start() {
-	bott, err := tgbotapi.NewBotAPI(token)
+func start(botToken string) {
+	bott, err := api.NewBotAPI(botToken)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -36,10 +36,13 @@ func start() {
 	bot.Debug = true
 	log.Printf("Authorized on account: %s  ID: %d", bot.Self.UserName, bot.Self.ID)
 
-	u := tgbotapi.NewUpdate(0)
+	u := api.NewUpdate(0)
 	u.Timeout = 60
 
 	updates, err := bot.GetUpdatesChan(u)
+	if err != nil {
+		panic("Can't get Updates")
+	}
 	for update := range updates {
 		if update.Message == nil { // ignore any non-Message updates
 			continue
@@ -52,14 +55,22 @@ func start() {
 /**
  * 对于每一个update的单独处理
  */
-func processUpdate(update tgbotapi.Update) {
-	var msg tgbotapi.MessageConfig
+func processUpdate(update api.Update) {
+	var msg api.MessageConfig
 	upmsg := update.Message
 	gid := upmsg.Chat.ID
 	uid := upmsg.From.ID
+	//检查是不是新加的群或者新开的人
+	in := checkInGroup(gid)
+	if !in { //不在就需要加入, 内存中加一份, 数据库中添加一条空规则记录
+		fmt.Println("新群組：", gid)
+		groups = append(groups, gid)
+		allkvs[gid] = make(Kvs)
+		dbAddNewGroup(gid)
+	}
 	if upmsg.IsCommand() {
-		msg = tgbotapi.NewMessage(gid, "")
-		_, _ = bot.DeleteMessage(tgbotapi.NewDeleteMessage(gid, upmsg.MessageID))
+		msg = api.NewMessage(gid, "")
+		_, _ = bot.DeleteMessage(api.NewDeleteMessage(gid, upmsg.MessageID))
 		switch upmsg.Command() {
 		case "start", "help":
 			msg.Text = "本机器人能够自动回复特定关键词"
@@ -109,10 +120,10 @@ func processUpdate(update tgbotapi.Update) {
 			sendMessage(msg)
 			banMember(gid, uid, 30)
 		case "banme":
-			botme, _ := bot.GetChatMember(tgbotapi.ChatConfigWithUser{gid, "", 838289550})
+			botme, _ := bot.GetChatMember(api.ChatConfigWithUser{ChatID: gid, UserID: bot.Self.ID})
 			if botme.CanRestrictMembers {
 				rand.Seed(time.Now().UnixNano())
-				sec := rand.Intn(540)+60
+				sec := rand.Intn(540) + 60
 				banMember(gid, uid, int64(sec))
 				msg.Text = "恭喜[" + upmsg.From.String() + "](tg://user?id=" + strconv.Itoa(upmsg.From.ID) + ")获得" + strconv.Itoa(sec) + "秒的禁言礼包"
 				msg.ParseMode = "Markdown"
@@ -133,15 +144,6 @@ func processUpdate(update tgbotapi.Update) {
 		default:
 		}
 	} else {
-		//检查是不是新加的群或者新开的人
-		in := checkInGroup(gid)
-		if !in { //不在就需要加入, 内存中加一份, 数据库中添加一条空规则记录
-			groups = append(groups, gid)
-			newkvs := make(Kvs)
-			allkvs[gid] = newkvs
-			dbaddgroup(gid)
-		}
-
 		//回复类型的管理命令
 		if upmsg.ReplyToMessage != nil {
 			reply_to_memid := upmsg.ReplyToMessage.From.ID
@@ -149,9 +151,9 @@ func processUpdate(update tgbotapi.Update) {
 			case "ban":
 				if checkAdmin(gid, *upmsg.From) {
 					banMember(gid, reply_to_memid, -1)
-					mem, _ := bot.GetChatMember(tgbotapi.ChatConfigWithUser{gid, "", reply_to_memid})
+					mem, _ := bot.GetChatMember(api.ChatConfigWithUser{ChatID: gid, SuperGroupUsername: "", UserID: reply_to_memid})
 					if !mem.CanSendMessages {
-						msg = tgbotapi.NewMessage(gid, "")
+						msg = api.NewMessage(gid, "")
 						msg.Text = "[" + upmsg.From.String() + "](tg://user?id=" + strconv.Itoa(upmsg.From.ID) + ") 禁言了 " +
 							"[" + upmsg.ReplyToMessage.From.String() + "](tg://user?id=" + strconv.Itoa(reply_to_memid) + ") "
 						msg.ParseMode = "Markdown"
@@ -161,9 +163,9 @@ func processUpdate(update tgbotapi.Update) {
 			case "unban":
 				if checkAdmin(gid, *upmsg.From) {
 					unbanMember(gid, reply_to_memid)
-					//mem,_ := bot.GetChatMember(tgbotapi.ChatConfigWithUser{gid, "", reply_to_memid})
+					//mem,_ := bot.GetChatMember(api.ChatConfigWithUser{gid, "", reply_to_memid})
 					//
-					msg = tgbotapi.NewMessage(gid, "")
+					msg = api.NewMessage(gid, "")
 					msg.Text = "[" + upmsg.From.String() + "](tg://user?id=" + strconv.Itoa(upmsg.From.ID) + ") 解禁了 " +
 						"[" + upmsg.ReplyToMessage.From.String() + "](tg://user?id=" + strconv.Itoa(reply_to_memid) + ") "
 					msg.ParseMode = "Markdown"
@@ -183,12 +185,12 @@ func processUpdate(update tgbotapi.Update) {
 
 		replyText := findKey(gid, upmsg.Text)
 		if replyText == "delete" {
-			_, _ = bot.DeleteMessage(tgbotapi.NewDeleteMessage(gid, upmsg.MessageID))
+			_, _ = bot.DeleteMessage(api.NewDeleteMessage(gid, upmsg.MessageID))
 		} else if strings.HasPrefix(replyText, "ban") {
-			_, _ = bot.DeleteMessage(tgbotapi.NewDeleteMessage(gid, upmsg.MessageID))
+			_, _ = bot.DeleteMessage(api.NewDeleteMessage(gid, upmsg.MessageID))
 			banMember(gid, uid, -1)
 		} else if strings.HasPrefix(replyText, "kick") {
-			_, _ = bot.DeleteMessage(tgbotapi.NewDeleteMessage(gid, upmsg.MessageID))
+			_, _ = bot.DeleteMessage(api.NewDeleteMessage(gid, upmsg.MessageID))
 			kickMember(gid, uid)
 		} else if strings.HasPrefix(replyText, "photo:") {
 			sendPhoto(gid, replyText[6:])
@@ -198,10 +200,8 @@ func processUpdate(update tgbotapi.Update) {
 			sendVideo(gid, replyText[6:])
 		} else if strings.HasPrefix(replyText, "file:") {
 			sendFile(gid, replyText[5:])
-		} else if strings.HasPrefix(replyText, "msg:") {
-			forwardMessage(gid, replyText[4:])
 		} else if replyText != "" {
-			msg = tgbotapi.NewMessage(gid, replyText)
+			msg = api.NewMessage(gid, replyText)
 			msg.DisableWebPagePreview = true
 			msg.ReplyToMessageID = upmsg.MessageID
 			sendMessage(msg)
@@ -220,7 +220,7 @@ func processUpdate(update tgbotapi.Update) {
 
 		//检查清真并剔除
 		if checkQingzhen(upmsg.Text) {
-			_, _ = bot.DeleteMessage(tgbotapi.NewDeleteMessage(gid, upmsg.MessageID))
+			_, _ = bot.DeleteMessage(api.NewDeleteMessage(gid, upmsg.MessageID))
 			banMember(gid, uid, -1)
 		}
 	}

@@ -1,5 +1,12 @@
 # telegram 关键词自动回复机器人 开源版本
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot?ref=badge_shield)
+<p align="center">
+    <a href="https://goreportcard.com/report/github.com/zu1k/tg-keyword-reply-bot">
+        <img src="https://goreportcard.com/badge/github.com/zu1k/tg-keyword-reply-bot?style=flat-square">
+    </a>
+    <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot?ref=badge_shield">
+        <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzu1k%2Ftg-keyword-reply-bot.svg?type=shield" alt="FOSSA Status">
+    </a>
+</p>
 
 这个是关键词回复机器人的开源版本代码，[Release](https://github.com/zu1k/tg-keyword-reply-bot/releases) 中发布的为后续闭源版本，功能更多。
 

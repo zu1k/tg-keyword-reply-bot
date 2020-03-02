@@ -18,18 +18,19 @@ const delText = "格式要求:\r\n" +
 	"`/del 机场`\r\n" +
 	"就会删除一条规则,机器人不再回复机场关键词"
 
-const isnotAdminWarn = "你不是管理员,请勿使用此命令"
-
 type Kvs map[string]string
 
-var allkvs = make(map[int64]Kvs)
-var token string
-
-var groups []int64
+var (
+	allkvs      = make(map[int64]Kvs)
+	groups      []int64
+	superUserId int
+)
 
 func jsonify(kvsin Kvs) string {
 	s, err := json.Marshal(kvsin)
-	checkErr(err)
+	if err != nil {
+		return ""
+	}
 	return string(s)
 }
 
@@ -37,10 +38,6 @@ func json2kvs(jsonin string) Kvs {
 	tkvs := make(Kvs)
 	_ = json.Unmarshal([]byte(jsonin), &tkvs)
 	return tkvs
-}
-
-func loadinfo() {
-	dbread()
 }
 
 /**
@@ -58,7 +55,7 @@ func addRule(gid int64, rule string) {
 	} else {
 		_addOneRule(keys, value, kvs)
 	}
-	dbupdategroup(gid, jsonify(kvs))
+	dbUpdateGroupRule(gid, jsonify(kvs))
 }
 
 /**
@@ -75,7 +72,7 @@ func _addOneRule(key string, value string, kvs Kvs) {
 func delRule(gid int64, key string) {
 	kvs := allkvs[gid]
 	delete(kvs, key)
-	dbupdategroup(gid, jsonify(kvs))
+	dbUpdateGroupRule(gid, jsonify(kvs))
 }
 
 /**

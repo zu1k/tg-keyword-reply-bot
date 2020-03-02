@@ -1,96 +1,67 @@
 package main
 
 import (
-	"database/sql"
-
-	_ "github.com/mattn/go-sqlite3"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-var db = &sql.DB{}
+var db *gorm.DB
 
-
-func dbinit(token string) {
-	_dbcreate()
-	stmt, err := db.Prepare("INSERT INTO settings(key, value) values(?,?)")
-	checkErr(err)
-	_, err = stmt.Exec("token", token)
-	checkErr(err)
+type Setting struct {
+	gorm.Model
+	Key   string `gorm:"unique;not null"`
+	Value string
 }
 
-
-func dbaddgroup(groupid int64) {
-	stmt, err := db.Prepare("INSERT INTO keyword_reply(groupid, kvjson) values(?,?)")
-	checkErr(err)
-	_, err = stmt.Exec(groupid, "")
-	checkErr(err)
+type Rule struct {
+	gorm.Model
+	GroupId  int64 `gorm:"unique;not null"`
+	RuleJson string
 }
 
-
-func dbupdategroup(groupid int64, kvjson string) {
-	stmt, err := db.Prepare("update keyword_reply set kvjson=? where groupid=?")
-	checkErr(err)
-	_, err = stmt.Exec(kvjson, groupid)
-	checkErr(err)
-}
-
-
-func dbread() {
-	rows, err := db.Query("SELECT * FROM keyword_reply")
-	checkErr(err)
-	var groupid int64
-	var kvjson string
-
-	for rows.Next() {
-		err = rows.Scan(&groupid, &kvjson)
-		checkErr(err)
-		kvs := json2kvs(kvjson)
-		allkvs[groupid] = kvs
-		groups = append(groups, groupid)
-	}
-	rows.Close()
-
-	rows, err = db.Query("SELECT value FROM settings")
-	checkErr(err)
-	var value string
-	rows.Next()
-	err = rows.Scan(&value)
-	checkErr(err)
-	token = value
-	rows.Close()
-}
-
-func dbopen() {
-	dbb, err := sql.Open("sqlite3", "./bot.db")
-	checkErr(err)
-	db = dbb
-}
-
-func dbclose() {
-	db.Close()
-}
-
-func checkErr(err error) {
+func dbInit(newToken string) (token string) {
+	dbtmp, err := gorm.Open("sqlite3", "data.db")
 	if err != nil {
-		panic(err)
+		panic("failed to connect database")
 	}
+	db = dbtmp
+	db.AutoMigrate(&Setting{}, &Rule{})
+	var setting Setting
+	db.Find(&setting, "Key=?", "token")
+	token = setting.Value
+	if newToken != "" {
+		token = newToken
+		if setting.ID > 0 {
+			setting.Value = newToken
+			db.Model(&setting).Update(setting)
+		} else {
+			db.Create(&Setting{
+				Key:   "token",
+				Value: newToken,
+			})
+		}
+	}
+	dbReadAllGroupRules()
+	return
 }
 
+func dbAddNewGroup(groupId int64) {
+	db.Create(&Rule{
+		GroupId:  groupId,
+		RuleJson: "",
+	})
+}
 
-func _dbcreate() {
-	settings := `
-    CREATE TABLE IF NOT EXISTS settings(
-        key VARCHAR(64) PRIMARY KEY,
-        value VARCHAR(200) NULL 
-    );
-    `
+func dbUpdateGroupRule(groupId int64, ruleJson string) {
+	db.Model(&Rule{}).Where("group_id=?", groupId).Update("rule_json", ruleJson)
+}
 
-	kwr := `
-    CREATE TABLE IF NOT EXISTS keyword_reply(
-		groupid INTEGER PRIMARY KEY,
-		kvjson VARCHAR(500000) NULL		
-    );
-    `
-
-	db.Exec(settings)
-	db.Exec(kwr)
+func dbReadAllGroupRules() {
+	var allGroupRules []Rule
+	db.Find(&allGroupRules)
+	for _, rule := range allGroupRules {
+		kvs := json2kvs(rule.RuleJson)
+		allkvs[rule.GroupId] = kvs
+		groups = append(groups, rule.GroupId)
+	}
 }
