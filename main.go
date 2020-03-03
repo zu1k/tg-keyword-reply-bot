@@ -68,8 +68,7 @@ func processUpdate(update *api.Update) {
 	//检查是不是新加的群或者新开的人
 	in := checkInGroup(gid)
 	if !in { //不在就需要加入, 内存中加一份, 数据库中添加一条空规则记录
-		common.AllGroupId = append(common.AllGroupId, gid)
-		common.AllGroupRules[gid] = make(common.RuleMap)
+		common.AddNewGroup(gid)
 		db.AddNewGroup(gid)
 	}
 	if upmsg.IsCommand() {
