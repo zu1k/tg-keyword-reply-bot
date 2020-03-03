@@ -1,10 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"regexp"
 	"strconv"
 	"strings"
+	"tg-keyword-reply-bot/common"
+	"tg-keyword-reply-bot/db"
 )
 
 const addText = "格式要求:\r\n" +
@@ -18,68 +19,46 @@ const delText = "格式要求:\r\n" +
 	"`/del 机场`\r\n" +
 	"就会删除一条规则,机器人不再回复机场关键词"
 
-type Kvs map[string]string
-
-var (
-	allkvs      = make(map[int64]Kvs)
-	groups      []int64
-	superUserId int
-)
-
-func jsonify(kvsin Kvs) string {
-	s, err := json.Marshal(kvsin)
-	if err != nil {
-		return ""
-	}
-	return string(s)
-}
-
-func json2kvs(jsonin string) Kvs {
-	tkvs := make(Kvs)
-	_ = json.Unmarshal([]byte(jsonin), &tkvs)
-	return tkvs
-}
-
 /**
  * 添加规则
  */
 func addRule(gid int64, rule string) {
-	kvs := allkvs[gid]
+	rules := common.AllGroupRules[gid]
 	r := strings.Split(rule, "===")
 	keys, value := r[0], r[1]
 	if strings.Contains(keys, "||") {
 		ks := strings.Split(keys, "||")
 		for _, key := range ks {
-			_addOneRule(key, value, kvs)
+			_addOneRule(key, value, rules)
 		}
 	} else {
-		_addOneRule(keys, value, kvs)
+		_addOneRule(keys, value, rules)
 	}
-	dbUpdateGroupRule(gid, jsonify(kvs))
+	db.UpdateGroupRule(gid, rules.String())
 }
 
 /**
  * 给addRule使用的辅助方法
  */
-func _addOneRule(key string, value string, kvs Kvs) {
+func _addOneRule(key string, value string, rules common.RuleMap) {
 	key = strings.Replace(key, " ", "", -1)
-	kvs[key] = value
+	rules[key] = value
 }
 
 /**
  * 删除规则
  */
 func delRule(gid int64, key string) {
-	kvs := allkvs[gid]
-	delete(kvs, key)
-	dbUpdateGroupRule(gid, jsonify(kvs))
+	rules := common.AllGroupRules[gid]
+	delete(rules, key)
+	db.UpdateGroupRule(gid, rules.String())
 }
 
 /**
  * 获取一个群组所有规则的列表
  */
 func getRuleList(gid int64) []string {
-	kvs := allkvs[gid]
+	kvs := common.AllGroupRules[gid]
 	str := ""
 	var strs []string
 	num := 1
@@ -102,7 +81,7 @@ func getRuleList(gid int64) []string {
  * 查询是否包含相应的自动回复规则
  */
 func findKey(gid int64, input string) string {
-	kvs := allkvs[gid]
+	kvs := common.AllGroupRules[gid]
 	for keyword, reply := range kvs {
 		if strings.HasPrefix(keyword, "re:") {
 			keyword = keyword[3:]

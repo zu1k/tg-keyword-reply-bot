@@ -1,8 +1,9 @@
-package main
+package db
 
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"tg-keyword-reply-bot/common"
 )
 
 var db *gorm.DB
@@ -19,7 +20,7 @@ type Rule struct {
 	RuleJson string
 }
 
-func dbInit(newToken string) (token string) {
+func Init(newToken string) (token string) {
 	dbtmp, err := gorm.Open("sqlite3", "data.db")
 	if err != nil {
 		panic("failed to connect database")
@@ -45,14 +46,14 @@ func dbInit(newToken string) (token string) {
 	return
 }
 
-func dbAddNewGroup(groupId int64) {
+func AddNewGroup(groupId int64) {
 	db.Create(&Rule{
 		GroupId:  groupId,
 		RuleJson: "",
 	})
 }
 
-func dbUpdateGroupRule(groupId int64, ruleJson string) {
+func UpdateGroupRule(groupId int64, ruleJson string) {
 	db.Model(&Rule{}).Where("group_id=?", groupId).Update("rule_json", ruleJson)
 }
 
@@ -60,8 +61,8 @@ func dbReadAllGroupRules() {
 	var allGroupRules []Rule
 	db.Find(&allGroupRules)
 	for _, rule := range allGroupRules {
-		kvs := json2kvs(rule.RuleJson)
-		allkvs[rule.GroupId] = kvs
-		groups = append(groups, rule.GroupId)
+		ruleStruct := common.Json2kvs(rule.RuleJson)
+		common.AllGroupRules[rule.GroupId] = ruleStruct
+		common.AllGroupId = append(common.AllGroupId, rule.GroupId)
 	}
 }

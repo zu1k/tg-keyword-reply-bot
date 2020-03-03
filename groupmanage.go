@@ -2,6 +2,7 @@ package main
 
 import (
 	"strconv"
+	"tg-keyword-reply-bot/common"
 	"time"
 	"unicode"
 
@@ -30,7 +31,7 @@ func checkAdmin(gid int64, user api.User) bool {
  * 检查是不是新加的群或者新开的人
  */
 func checkInGroup(id int64) bool {
-	for _, gid := range groups {
+	for _, gid := range common.AllGroupId {
 		if gid == id {
 			return true
 		}
