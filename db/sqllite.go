@@ -21,7 +21,7 @@ type rule struct {
 	RuleJson string
 }
 
-// 数据库初始化，包括新建数据库（如果还没有建立），基本数据的读写
+// Init 数据库初始化，包括新建数据库（如果还没有建立），基本数据的读写
 func Init(newToken string) (token string) {
 	dbtmp, err := gorm.Open("sqlite3", "data.db")
 	if err != nil {
@@ -48,7 +48,7 @@ func Init(newToken string) (token string) {
 	return
 }
 
-// 数据库中添加一条记录来记录新群组的规则
+// AddNewGroup 数据库中添加一条记录来记录新群组的规则
 func AddNewGroup(groupId int64) {
 	db.Create(&rule{
 		GroupId:  groupId,
@@ -56,7 +56,7 @@ func AddNewGroup(groupId int64) {
 	})
 }
 
-// 更新群组的规则
+// UpdateGroupRule 更新群组的规则
 func UpdateGroupRule(groupId int64, ruleJson string) {
 	db.Model(&rule{}).Where("group_id=?", groupId).Update("rule_json", ruleJson)
 }
