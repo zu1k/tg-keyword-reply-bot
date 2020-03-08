@@ -76,7 +76,7 @@ servicelist - 查看机器人功能列表
 
 ## 目前在线机器人
 - [这个我知道](https://t.me/keyword_reply_bot)  拒绝广告群，珍惜服务器资源，不要滥用      
-- [关键词小助手](https://t.me/keyword_unlimited_bot)  博彩、数字货币、狗推专用，无任何限制      
+如需搭建独享机器人，欢迎邮箱联系我
 
 
 ## 赞助
@@ -86,7 +86,7 @@ servicelist - 查看机器人功能列表
 - 进入发卡平台购买虚拟卡片进行赞助： [发卡平台](https://www.kuaifaka.com/purchasing?link=peekfun) (平台收取一定手续费)
 
 ### 目前赞助名单
-- [聪聪](https://t.me/congcong) 420元+860元
+- [聪聪](https://t.me/congcong) 420元+860元+1664元
 - [小明HR](https://t.me/xuezha) 36元
 - [阿雅](https://t.me/alin0524) 50元 
 - [冠希 科技传媒](https://t.me/a12399999) 39元
