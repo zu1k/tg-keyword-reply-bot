@@ -27,21 +27,9 @@
 
 
 ## 闭源版本介绍
-机器人闭源版本不断更新，至今已增加更多功能，详细功能见 **[使用说明](https://telegra.ph/%E8%BF%99%E4%B8%AA%E6%88%91%E7%9F%A5%E9%81%93%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E-07-07)**
+闭源版本增加更多实用功能
 
-### 使用闭源版本可执行文件搭建  
-进入 **[Release 页面](https://github.com/zu1k/tg-keyword-reply-bot/releases)** 下载最新版本可执行文件到服务器，然后进行部署       
-- 系统推荐使用： Ubuntu 18.04, glibc版本2.27
-- 初次使用 `./tg-keyword-reply tg-bot-token` , 会将token存到数据库中
-- 后面使用 `./tg-keyword-reply` , 无需输入token
-
-#### 服务器选择
-因为telegram bot api服务器在荷兰，所以搭建机器人推荐荷兰服务器，比较好的推荐vultr      
-你可以选择使用我的aff链接注册vultr: https://www.vultr.com/?ref=7791688-4F      
-因为机器人使用golang编写，性能较高，无需购买高配服务器，选择vultr最低配1核1G足以
-
-#### 机器人命令列表
-是推荐给用户显示的命令，私聊机器人爹设置
+### 机器人命令列表
 
 ```
 help - 查看帮助
@@ -76,7 +64,7 @@ servicelist - 查看机器人功能列表
 赞助并非赞赏，所有费用皆用于服务器支付
 - 进入发卡平台购买虚拟卡片进行赞助： [发卡平台](https://www.kuaifaka.com/purchasing?link=peekfun) (平台收取一定手续费)
 
-### 目前赞助名单
+### 赞助名单
 - [聪聪](https://t.me/congcong) 420元+860元+1664元
 - [小明HR](https://t.me/xuezha) 36元
 - [阿雅](https://t.me/alin0524) 50元 
