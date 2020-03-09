@@ -68,8 +68,8 @@ servicelist - 查看机器人功能列表
 - [博客说明](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot.html)
 
 ## 目前在线机器人
-- [这个我知道](https://t.me/keyword_reply_bot)  拒绝广告群，珍惜服务器资源，不要滥用      
-如需搭建独享机器人，欢迎邮箱联系我
+- [这个我知道](https://t.me/keyword_reply_bot)  拒绝博彩、狗推等广告群组                 
+如需独享无限制机器人，麻烦邮箱联系我
 
 
 ## 赞助
