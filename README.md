@@ -63,13 +63,6 @@ goodbye - 开关离群送别功能
 deletejoinmessage - 开关删除加群消息功能
 servicelist - 查看机器人功能列表
 ```
-#### 注意事项
-因为业务需要，需要私聊机器人爹关闭 Privacy Mode
-
-## 问题反馈
-欢迎大家反馈问题，在阅读了 **[使用说明](https://telegra.ph/%E8%BF%99%E4%B8%AA%E6%88%91%E7%9F%A5%E9%81%93%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E-07-07)** 之后仍旧无法解决问题，可以通过下满两种方式反馈
-- 进入 [反馈群](https://t.me/keywordreplybotcallback) 反馈问题 （推荐，实时性强）
-- 在github本库Issue反馈 （不太建议）
 
 ## 使用说明
 - [博客说明](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot.html)
