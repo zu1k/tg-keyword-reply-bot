@@ -26,6 +26,11 @@
 - 同理,gif将`photo`替换成`gif`,视频替换成`video`,文件替换成`file`
 - 注意: 这里的链接必须是公开群组的,否则无法发出来
 
+### 如何搭建
+1. clone本仓库并按照需求进行修改
+2. 使用 `go build -ldflags "-w -s" -trimpath -o tgbot .` 进行编译
+3. 使用 `./tgbot -t TOKEN` 运行机器人
+
 
 ## 闭源版本
 闭源版本增加更多实用功能，可执行文件见 [Release](https://github.com/zu1k/tg-keyword-reply-bot/releases) 页面。
