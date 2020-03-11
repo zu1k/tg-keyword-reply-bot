@@ -1,4 +1,4 @@
-# telegram 关键词自动回复机器人 开源版本
+# Telegram 关键词自动回复机器人
 <p align="center">
     <a href="https://goreportcard.com/report/github.com/zu1k/tg-keyword-reply-bot">
         <img src="https://goreportcard.com/badge/github.com/zu1k/tg-keyword-reply-bot">
@@ -8,10 +8,11 @@
     </a>
 </p>
 
-这个是关键词回复机器人的开源版本代码，[Release](https://github.com/zu1k/tg-keyword-reply-bot/releases) 中发布的为后续闭源版本，功能更多。
+关键词机器人分开源和闭源两个版本，开源版本包含最基础的关键词回复功能，闭源版本增加了更多实用功能。                 
+本项目为关键词自动回复机器人的开源代码，在 [Release](https://github.com/zu1k/tg-keyword-reply-bot/releases) 中发布的为闭源版本可执行文件。
 
-## 开源版本介绍
-### 基本命令介绍
+## 开源版本
+### 基本命令
 - 添加关键词回复规则 `/add 关键词===回复内容` 或者 `/add 关键词1||关键词2===回复内容` 
 - 关键词可以使用正则表达式,例如`/add re:p([a-z]+)ch===测试正则`,就会匹配规则`p([a-z]+)ch`  
 - 删除关键词规则 `/del 关键词` 暂不支持一次性删除多个关键词
@@ -26,11 +27,10 @@
 - 注意: 这里的链接必须是公开群组的,否则无法发出来
 
 
-## 闭源版本介绍
-闭源版本增加更多实用功能
+## 闭源版本
+闭源版本增加更多实用功能，可执行文件见 [Release](https://github.com/zu1k/tg-keyword-reply-bot/releases) 页面。
 
 ### 机器人命令列表
-
 ```
 help - 查看帮助
 add - 添加规则
@@ -53,18 +53,18 @@ servicelist - 查看机器人功能列表
 ```
 
 ## 使用说明
-- [博客说明](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot.html)
+使用说明见 [博客](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot.html)
 
-## 目前在线机器人
-- [这个我知道](https://t.me/keyword_reply_bot)  拒绝博彩、狗推等广告群组                 
-如需独享无限制机器人，麻烦邮箱联系我
+## 在线机器人
+- [这个我知道](https://t.me/keyword_reply_bot)  拒绝博彩、狗推、洗钱等群组                 
+如需付费搭建独享无限制机器人，麻烦邮箱联系我
 
 
 ## 赞助
-赞助并非赞赏，所有费用皆用于服务器支付
-- 进入发卡平台购买虚拟卡片进行赞助： [发卡平台](https://www.kuaifaka.com/purchasing?link=peekfun) (平台收取一定手续费)
+赞助并非赞赏，所有费用皆用于服务器支付。           
+进入发卡平台购买虚拟卡片进行赞助： [发卡平台](https://www.kuaifaka.com/purchasing?link=peekfun)      
 
-### 赞助名单
+### 赞助名单（感谢）
 - [聪聪](https://t.me/congcong) 420元+860元+1664元
 - [小明HR](https://t.me/xuezha) 36元
 - [阿雅](https://t.me/alin0524) 50元 
