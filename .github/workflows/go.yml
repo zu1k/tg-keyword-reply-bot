@@ -24,10 +24,12 @@ jobs:
             dep ensure
         fi
 
+    - run: mkdir -p build
+
     - name: Build
-      run: go build -v -ldflags "-w -s" -trimpath .
+      run: go build -v -ldflags "-w -s" -trimpath -o build/tg-keyword-reply-bot .
     
     - uses: actions/upload-artifact@v1
       with:
         name: bin
-        path: .
+        path: build
