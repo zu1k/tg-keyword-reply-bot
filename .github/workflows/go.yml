@@ -26,3 +26,8 @@ jobs:
 
     - name: Build
       run: go build -v -ldflags "-w -s" -trimpath .
+    
+    - uses: actions/upload-artifact@v1
+      with:
+        name: bin
+        path: .
