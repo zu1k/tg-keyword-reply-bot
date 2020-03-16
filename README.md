@@ -37,9 +37,15 @@
 - 注意: 这里的链接必须是公开群组的,否则无法发出来
 
 ### 如何搭建
+#### 自己编译
 1. clone本仓库并按照需求进行修改
 2. 使用 `go build -ldflags "-w -s" -trimpath -o tgbot .` 进行编译
 3. 使用 `./tgbot -t TOKEN` 运行机器人
+
+#### 使用Github Action编译的版本
+1. 访问 https://github.com/zu1k/tg-keyword-reply-bot/actions
+2. 下载Github Action编译的可执行文件，解压bin.zip
+3. 使用 `./tg-keyword-reply-bot -t TOKEN` 运行机器人
 
 
 ## 闭源版本
