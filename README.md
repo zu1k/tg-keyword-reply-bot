@@ -74,7 +74,7 @@ servicelist - 查看机器人功能列表
 ```
 
 ## 使用说明
-使用说明见 [博客](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot.html)
+使用说明见 [博客](https://blog.lgf.im/2019/11/telegram-keyword-reply-bot)
 
 ## 在线机器人
 - [这个我知道](https://t.me/keyword_reply_bot)  拒绝博彩、狗推、洗钱等群组                 
