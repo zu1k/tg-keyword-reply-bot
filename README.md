@@ -83,7 +83,8 @@ servicelist - 查看机器人功能列表
 
 ## 赞助
 赞助并非赞赏，所有费用皆用于服务器支付。           
-进入发卡平台购买虚拟卡片进行赞助： [发卡平台](https://www.kuaifaka.com/purchasing?link=peekfun)      
+原赞助方式被恶意举报，[记录](http://donate.tgbot.co)  
+赞助请邮件单独联系我
 
 ### 赞助名单（感谢）
 - [聪聪](https://t.me/congcong) 420元+860元+1664元
