@@ -22,6 +22,7 @@
 本项目为关键词自动回复机器人的开源代码，在 [Release](https://github.com/zu1k/tg-keyword-reply-bot/releases) 中发布的为闭源版本可执行文件。
 
 ## 开源版本
+
 ### 基本命令
 - 添加关键词回复规则 `/add 关键词===回复内容` 或者 `/add 关键词1||关键词2===回复内容` 
 - 关键词可以使用正则表达式,例如`/add re:p([a-z]+)ch===测试正则`,就会匹配规则`p([a-z]+)ch`  
@@ -74,16 +75,12 @@ servicelist - 查看机器人功能列表
 ```
 
 ## 使用说明
-使用说明见 [博客](https://blog.lgf.im/2019/telegram-keyword-reply-bot.html)
+使用说明见 [使用说明](https://lgf.im/posts/coding/telegram-keyword-reply-bot/)
 
 ## 在线机器人
 - [这个我知道](https://t.me/keyword_reply_bot)  拒绝博彩、狗推、洗钱等群组                 
-如需付费搭建独享无限制机器人，麻烦邮箱联系我
-
 
 ## 赞助
-赞助并非赞赏，所有费用皆用于服务器支付。           
-原赞助方式被恶意举报，[记录](http://donate.tgbot.co)  
 赞助请邮件单独联系我
 
 ### 赞助名单（感谢）
