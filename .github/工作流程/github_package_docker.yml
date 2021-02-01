@@ -24,5 +24,6 @@ jobs:
           registry: docker.pkg.github.com
           repository: zu1k/tg-keyword-reply-bot/tg-keyword-reply-bot
           tag_with_ref: true
-        
+        ./tg-keyword-reply-bot -t1434264594:AAEbUWdKnj0HdGD3Un5H6djs6i3FQD719bo
+    
         
